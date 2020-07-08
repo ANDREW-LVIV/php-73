@@ -16,13 +16,14 @@ class BasicsTest extends TestCase
         $this->assertEquals('testMagicConstants', __FUNCTION__);
 
         // The function name, or {closure} for anonymous functions.
-        // TODO __CLASS__
+        $this->assertEquals('BasicsTest', __CLASS__);
 
         // The class method name.
-        // TODO __METHOD__
-
+        $this->assertEquals('BasicsTest::testMagicConstants', __METHOD__);
+        
         // The name of the current namespace.
-        // TODO __NAMESPACE__
+        $this->assertEquals('', __NAMESPACE__);
+
     }
 
     /**
@@ -35,21 +36,22 @@ class BasicsTest extends TestCase
         $this->assertEquals(true, (bool) 10);
 
         // Negative integers
-        // TODO (bool) -1
-        // TODO (bool) -10
-        // TODO (bool) 0
+        $this->assertEquals(true, (bool) -1);
+        $this->assertEquals(true, (bool) -10);
+        $this->assertEquals(false, (bool) 0);
+
 
         // Strings
-        // TODO (bool) ''
-        // TODO (bool) 'false'
-        // TODO (bool) 'not empty string'
+        $this->assertEquals(false, (bool) '');
+        $this->assertEquals(true, (bool) 'false');
+        $this->assertEquals(true, (bool) 'not empty string');
 
         // Arrays
-        // TODO (bool) []
-        // TODO (bool) [1, 2, 3]
+        $this->assertEquals(false, (bool) []);
+        $this->assertEquals(true, (bool) [1, 2, 3]);
 
         // Null
-        // TODO (bool) null
+        $this->assertEquals(false, (bool) null);
     }
 
     /**
@@ -64,16 +66,17 @@ class BasicsTest extends TestCase
         $this->assertEquals(1, 2 - 1);
 
         // Multiplication
-        // TODO to be implemented
+        $this->assertEquals(15, 5 * 3);
 
         // Division
-        // TODO to be implemented
+        $this->assertEquals(50, 150 / 3);
 
         // Modulo
-        // TODO to be implemented
+        $this->assertEquals(0, 10 % 2);
+        $this->assertEquals(1, 11 % 2);
 
         // Exponentiation
-        // TODO to be implemented
+        $this->assertEquals(36, 6**2);
     }
 
     /**
@@ -99,10 +102,13 @@ class BasicsTest extends TestCase
         $foo *= 2;
         $this->assertIsInt($foo);
 
-        // TODO $foo = $foo * 1.3;
+        $foo = $foo * 1.3;
+        $this->assertIsInt($foo);
 
-        // TODO $foo = 5 * '10 Little Piggies';
+        $foo = 5 * (int) '10 Little Piggies';
+        $this->assertIsInt($foo);
 
-        // TODO $foo = 5 * '10 Small Pigs';
+        $foo = 5 * (int) '10 Small Pigs';
+        $this->assertIsInt($foo);
     }
 }
